@@ -1,38 +1,10 @@
-const { Client, Message, MessageEmbed, Collection } = require("discord.js");
-const colors = require("colors");
-const fs = require("fs");
-const client = new Client({
-  messageCacheLifetime: 60,
-  fetchAllMembers: false,
-  messageCacheMaxSize: 10,
-  restTimeOffset: 0,
-  restWsBridgetimeout: 100,
-  shards: "auto",
-  allowedMentions: {
-    parse: ["roles", "users", "everyone"],
-    repliedUser: true,
-  },
-  partials: ["USER", "GUILD_MEMBER", "MESSAGE", "CHANNEL", "REACTION", "MANAGE_MESSAGES"],
-  intents: 32767,
-});
-module.exports = client;
+const { Client, Intents } = require('discord.js');
+const { token } = require('./config.json');
 
-const config = require("./config/config.json");
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-const ee = require("./config/embed.json");
-const prefix = config.prefix;
-const token = config.token;
-
-// Global Variables
-client.commands = new Collection();
-client.aliases = new Collection();
-client.events = new Collection();
-client.cooldowns = new Collection();
-client.slashCommands = new Collection();
-client.categories = fs.readdirSync("./commands/");
-
-["command"].forEach((handler) => {
-  require(`./handler/${handler}`)(client);
+client.once('ready', () => {
+	console.log('Ready!');
 });
 
-client.login(token); 
+client.login(token);

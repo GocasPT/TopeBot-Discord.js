@@ -1,24 +1,31 @@
 {
-  "name": "tope",
-  "version": "2.0.0",
-  "description": "C'est la vie, mon ami",
+  "name": "topebot",
+  "version": "1.0.0",
+  "description": "C'est la vie, mon ami, agora no github",
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js",
     "dev": "nodemon bot.js"
   },
-  "author": "GocasPT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GocasPT/TopeBot-Discord.js.git"
+  },
+  "keywords": [
+    "Tope",
+    "DiscordBot",
+    "TopeBot"
+  ],
+  "author": "Guilherme Camacho",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GocasPT/TopeBot-Discord.js/issues"
+  },
+  "homepage": "https://github.com/GocasPT/TopeBot-Discord.js#readme",
   "dependencies": {
-    "@discordjs/voice": "^0.6.0",
-    "ascii-table": "^0.0.9",
-    "canvas": "^2.8.0",
-    "colors": "^1.4.0",
-    "discord-tts": "^1.2.0",
-    "discord.js": "^13.1.0",
-    "glob": "^7.1.7",
-    "moment": "^2.29.1",
-    "node-superfetch": "^0.2.3",
-    "nodemon": "^2.0.12"
+    "discord.js": "^13.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.10.0"
   }
 }
