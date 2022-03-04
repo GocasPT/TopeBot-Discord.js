@@ -1,5 +1,7 @@
 @ECHO off
 cls
 
-npm run dev
+call npm run upload
+
+call npm run dev
 pause
