@@ -1,6 +1,6 @@
 {
   "name": "topebot",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "C'est la vie, mon ami, agora no github",
   "main": "bot.js",
   "scripts": {
