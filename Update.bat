@@ -1,7 +1,8 @@
 @ECHO off
 cls
 
-call npm run upload
+::call git pull
 call npm i
-git pull
+::call npm run upload
+
 pause

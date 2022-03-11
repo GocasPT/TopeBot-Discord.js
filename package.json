@@ -1,6 +1,6 @@
 {
   "name": "topebot",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "C'est la vie, mon ami, agora no github",
   "main": "bot.js",
   "scripts": {
@@ -26,6 +26,8 @@
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.3.0",
+    "@sapphire/time-utilities": "^1.7.0",
+    "colorette": "^2.0.16",
     "discord-api-types": "^0.27.3",
     "discord.js": "^13.6.0",
     "nodemon": "^2.0.15"
