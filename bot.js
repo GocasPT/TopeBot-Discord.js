@@ -51,12 +51,13 @@ const { Client, Collection, Intents} = require('discord.js');
 const { bgBlue, bgYellow, bgGreen } = require("colorette");
 const { readdirSync } = require("fs");
 const { token } = require("./config.json")
-const logger = require("./modules/Logger.js");
+const logger = require("./modules/logger.js");
 
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 	partials: ["CHANNEL"],
 });
+
 
 const commands = new Collection();
 const aliases = new Collection();
@@ -86,9 +87,9 @@ const init = async () => {
 	readdirSync("./slash").map(async dir => {
         const slashFiles = readdirSync(`./slash/${dir}/`).map(async cmd=> {
             let props = require(`./slash/${dir}/${cmd}`)
-			logger.log(`Loading ${bgYellow('Slash command')}: ${props.commandData.name}`, "log");
+			logger.log(`Loading ${bgYellow('Slash command')}: ${props.name}`, "log");
 			
-			client.container.slashcmds.set(props.commandData.name, props);
+			client.container.slashcmds.set(props.name, props);
         })
     })
 

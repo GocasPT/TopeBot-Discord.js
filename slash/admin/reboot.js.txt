@@ -1,0 +1,16 @@
+const {exec} = require('child_process');
+
+module.exports = {
+	name: 'reboot',
+	description: 'Reboot all slash commands',
+	category: 'admin',
+	run: async (client, interaction) => {
+		await interaction.reply('Rebooting...');
+
+        client.destroy()
+
+        await exec('npm run start')
+
+		interaction.editReply('Done');
+	},
+};

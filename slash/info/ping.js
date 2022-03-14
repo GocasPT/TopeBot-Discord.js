@@ -1,11 +1,21 @@
-exports.run = async (client, interaction) => {
-    await interaction.deferReply();
-    const reply = await interaction.editReply("Ping?");
-    await interaction.editReply(`Pong! Latency is ${reply.createdTimestamp - interaction.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms.`);
-};
+const Discord = require('discord.js');
 
-exports.commandData = {
-    name: "ping",
-    description: "Pongs when pinged.",
-    options: []
+module.exports = {
+	name: 'ping',
+	description: 'Get bot speed',
+	category: 'info',
+	run: async (client, interaction) => {
+		await interaction.reply('🏓 Pong!');
+		const msg = await interaction.fetchReply();
+		const embed = new Discord.MessageEmbed()
+			.setAuthor({ name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
+			.setColor('RANDOM')
+			.setTimestamp()
+			.setDescription(
+				`**Time:** ${Math.floor(msg.createdTimestamp - interaction.createdTimestamp)} ms\n**API Ping:** ${
+					client.ws.ping
+				} ms`,
+			);
+		interaction.editReply({ embeds: [embed], content: `<@${interaction.user.id}>` });
+	},
 };

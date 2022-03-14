@@ -1,4 +1,5 @@
-const logger = require("../../modules/Logger.js");
+const fs = require('fs')
+const time = new Date();
 const config = require("../../config.json");
 
 module.exports = async (client, message) => {
@@ -8,7 +9,7 @@ module.exports = async (client, message) => {
 
   const prefixMention = new RegExp(`^<@!?${client.user.id}> ?$`);
   if (message.content.match(prefixMention)) {
-    return message.reply(`My prefix on this guild is \`${config.prefix}\``);
+    return message.reply(`My prefix is \`${config.prefix}\``);
   }
 
   const prefix = new RegExp(`^<@!?${client.user.id}> |^\\${config.prefix}`).exec(message.content);
@@ -33,6 +34,16 @@ module.exports = async (client, message) => {
 
   try {
     await cmd.run(client, message, args);
+
+    let CommandText = `${message.author.tag} in ${message.guild.name} channel triggered an interaction in ${time}.\n `
+
+    console.log(CommandText);
+	
+    fs.writeFile('CommandLog.txt', CommandText, { flag: 'a+' }, (err) => {
+      
+      if (err) throw err;
+    })
+
   } catch (e) {
     console.error(e);
     message.channel.send({ content: `There was a problem with your request.\n\`\`\`${e.message}\`\`\`` })

@@ -1,4 +1,4 @@
-const logger = require("./Logger.js");
+const logger = require("./logger.js");
 
 //Util funtion!!!!
 async function awaitReply(msg, question, limit = 60000) {
@@ -13,22 +13,17 @@ async function awaitReply(msg, question, limit = 60000) {
 }
 
 //Funny fuction
-/* MISCELLANEOUS NON-CRITICAL FUNCTIONS */
-  
-// toProperCase(String) returns a proper-cased string such as: 
-// toProperCase("Mary had a little lamb") returns "Mary Had A Little Lamb"
+// Mary had a little lamb → Mary Had A Little Lamb
 function toProperCase(string) {
   return string.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
 
-//Debug (?)
-// These 2 process methods will catch exceptions and give *more details* about the error and stack trace.
+//Tracking cache (Debug detector)
 process.on("uncaughtException", (err) => {
   const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, "g"), "./");
   logger.error(`Uncaught Exception: ${errorMsg}`);
   console.error(err);
-  // Always best practice to let the code crash on uncaught exceptions. 
-  // Because you should be catching them anyway.
+
   process.exit(1);
 });
 
