@@ -1,8 +1,3 @@
-/*const { version } = require("discord.js");
-const { DurationFormatter } = require("@sapphire/time-utilities");
-const os = require("os");
-const durationFormatter = new DurationFormatter();*/
-
 const Discord = require('discord.js');
 const { DurationFormatter } = require("@sapphire/time-utilities");
 const { version } = require("discord.js");
@@ -11,6 +6,7 @@ const os = require("os");
 exports.run = (client, message, args) => {
   const durationFormatter = new DurationFormatter();
   const duration = durationFormatter.format(client.uptime);
+  
   const topeStats = new Discord.MessageEmbed()
     .setColor('RANDOM')
     .setTitle('TopeBot')

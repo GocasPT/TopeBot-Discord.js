@@ -11,7 +11,7 @@ module.exports = async (client, interaction) => {
   try {
     await cmd.run(client, interaction);
 
-    let InteractionText = `${interaction.user.tag} in ${interaction.guild.name} channel triggered an interaction in ${time}.\n `
+    let InteractionText = `${interaction.user.tag} in ${interaction.guild.name} channel triggered an interaction in ${time}.\n`
 
     console.log(InteractionText);
 	
