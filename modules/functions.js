@@ -1,6 +1,8 @@
 const logger = require("./logger.js");
 
-//Util funtion!!!!
+//------------------
+//  Util funtion!!!!
+//------------------
 async function awaitReply(msg, question, limit = 60000) {
   const filter = m => m.author.id === msg.author.id;
   await msg.channel.send(question);
@@ -12,13 +14,24 @@ async function awaitReply(msg, question, limit = 60000) {
   }
 }
 
-//Funny fuction
+//------------------
+//  Funny fuction
+//------------------
 // Mary had a little lamb → Mary Had A Little Lamb
 function toProperCase(string) {
   return string.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
 
-//Tracking cache (Debug detector)
+//Gerador de números entre dois valores (ambos incluidos)
+function numberGenerator(min, max){
+  return Math.floor(
+    Math.random() * (max - min + 1) + min
+  )
+}
+
+//------------------
+//  Tracking cache (Debug detector)
+//------------------
 process.on("uncaughtException", (err) => {
   const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, "g"), "./");
   logger.error(`Uncaught Exception: ${errorMsg}`);
@@ -32,4 +45,4 @@ process.on("unhandledRejection", err => {
   console.error(err);
 });
 
-module.exports = { awaitReply, toProperCase };
+module.exports = { awaitReply, toProperCase,  numberGenerator};

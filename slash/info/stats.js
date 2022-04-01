@@ -3,6 +3,7 @@ const { DurationFormatter } = require("@sapphire/time-utilities");
 const { version } = require("discord.js");
 const progressbar = require('string-progressbar');
 const os = require("os");
+const osUS = require('os-utils');
 
 module.exports = {
 	name: 'stats',
@@ -44,7 +45,8 @@ module.exports = {
 				{ name: 'CPU Server Info:', value: `
 					• CPU Model: ${os.cpus()[0].model}
 					• Base velocity: ${os.cpus()[0].speed / 1000} GHz
-					• Logical processors: ${os.cpus().length}` },
+					• Logical processors: ${os.cpus().length}
+					• CPU Server Percentage: ${'In develop...'}` },
 				{ name: 'Disck Server Free:', value: `${'In develop...'}`},
 				{ name: 'Mem Server Free:', value: `${MemServerBar} GB in ${MemServerTotal} GB`},
 			)

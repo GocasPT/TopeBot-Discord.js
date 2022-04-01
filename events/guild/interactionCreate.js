@@ -16,7 +16,6 @@ module.exports = async (client, interaction) => {
     console.log(InteractionText);
 	
     fs.writeFile('InteractionLog.txt', InteractionText, { flag: 'a+' }, (err) => {
-      
       if (err) throw err;
     })
 
