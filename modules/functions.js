@@ -1,4 +1,6 @@
 const logger = require("./logger.js");
+const path = require('path');
+const fs = require('fs');
 
 //------------------
 //  Util funtion!!!!
@@ -12,6 +14,21 @@ async function awaitReply(msg, question, limit = 60000) {
   } catch (e) {
     return false;
   }
+}
+
+//Função que junta elementos de uma pasta numa array e devolve o array
+function getDir(dir, array){
+  let folder = path.join(__dirname, dir);
+
+  fs.readdir(folder, function (err, filesFolder) {
+      if (err) {
+          return console.log('Unable to scan directory: ' + err);
+      }
+
+      for(file of filesFolder){
+        array.push(path.join(folder, file));
+      }
+  });
 }
 
 //------------------
@@ -45,4 +62,4 @@ process.on("unhandledRejection", err => {
   console.error(err);
 });
 
-module.exports = { awaitReply, toProperCase,  numberGenerator};
+module.exports = { awaitReply, getDir, toProperCase,  numberGenerator};
