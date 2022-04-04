@@ -1,6 +1,8 @@
 const logger = require("./logger.js");
 const path = require('path');
 const fs = require('fs');
+const { resolve } = require("path");
+const { rejects } = require("assert");
 
 //------------------
 //  Util funtion!!!!
@@ -20,15 +22,23 @@ async function awaitReply(msg, question, limit = 60000) {
 function getDir(dir, array){
   let folder = path.join(__dirname, dir);
 
-  fs.readdir(folder, function (err, filesFolder) {
-      if (err) {
-          return console.log('Unable to scan directory: ' + err);
-      }
+  return new Promise((resolve, rejects) => {
+    fs.readdir(folder, function (err, filesFolder) {
+        if (err) {
+            console.log('Unable to scan directory: ' + err);
+            rejects()
+        }
 
-      for(file of filesFolder){
-        array.push(path.join(folder, file));
-      }
-  });
+        if(!filesFolder.length) resolve()
+        else {
+          for(file of filesFolder){
+            array.push(path.join(folder, file));
+            resolve()
+          }
+        }
+    })
+  })
+  
 }
 
 //------------------

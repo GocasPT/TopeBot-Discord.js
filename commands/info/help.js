@@ -1,14 +1,37 @@
-const { getDir } = require('../../modules/functions')
+const Discord = require('discord.js');
+const { getDir } = require('../../modules/functions');
+const path = require('path');
 
 exports.run = async (client, message, args) => {
     const commandDir = '../commands';
-    let list = [];
+    let foldersList = [];
+    let categoryFolderList = [];
+    let commandsString = ''
 
-    getDir(commandDir, list)
+    let embed = new Discord.MessageEmbed()
 
-    setTimeout(() => {
-        console.log(list)
-    }, 50);
+    await getDir(commandDir, foldersList)
+
+    for(let i = 0; i < foldersList.length; i++){
+        let newDir = path.join(commandDir, path.basename(foldersList[i]));
+
+        await getDir(newDir, categoryFolderList)
+
+        if(!categoryFolderList.length){
+            commandsString = 'Nada'
+        } else {
+            for(commandFile of categoryFolderList){
+                commandsString = commandsString + path.basename(commandFile).slice(0, -3) + ' '
+            } 
+        }
+        
+        embed.addField(`${path.basename(foldersList[i])}`, `${commandsString}`)
+
+        categoryFolderList = []
+        commandsString = ' '
+    }
+
+    message.channel.send({ embeds: [embed]});
 };
 
 exports.conf = {

@@ -55,7 +55,7 @@ exports.run = async (client, message, args) => {
 				• Base velocity: ${os.cpus()[0].speed / 1000} GHz
 				• Logical processors: ${os.cpus().length}
 				• CPU Server Usage Percentage: ${CPUServerBar}` },
-			{ name: 'Mem Server:', value: `${MemServerBar} in ${MemServerTotal} GB`},
+			{ name: 'Mem Server:', value: `${MemServerBar} in ${MemServerTotal} GB`}
 		)
 
     message.channel.send({ embeds: [topeStats]});
