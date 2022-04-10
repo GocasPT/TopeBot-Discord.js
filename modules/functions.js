@@ -1,12 +1,12 @@
 const logger = require("./logger.js");
 const path = require('path');
 const fs = require('fs');
-const { resolve } = require("path");
-const { rejects } = require("assert");
 
 //------------------
 //  Util funtion!!!!
 //------------------
+
+//Funão que espera da resposta do cliente
 async function awaitReply(msg, question, limit = 60000) {
   const filter = m => m.author.id === msg.author.id;
   await msg.channel.send(question);
@@ -44,6 +44,7 @@ function getDir(dir, array){
 //------------------
 //  Funny fuction
 //------------------
+
 // Mary had a little lamb → Mary Had A Little Lamb
 function toProperCase(string) {
   return string.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
