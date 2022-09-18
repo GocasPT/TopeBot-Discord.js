@@ -2,4 +2,4 @@
 
 npm run upload
 
-npm run dev
+screen -dmS TopeBot npm run dev
