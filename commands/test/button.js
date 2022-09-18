@@ -1,19 +1,15 @@
-const { MessageActionRow, MessageButton } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 exports.run = async (client, message) => {
-	const row = new MessageActionRow()
+	const row = new ActionRowBuilder()
 		.addComponents(
-			new MessageButton()
-				.setCustomId('upvote')
-				.setEmoji('785062885952192512')
-				.setStyle('SUCCESS'),
-			new MessageButton()
-				.setCustomId('downvote')
-				.setEmoji('🍕')
-				.setStyle('DANGER'),
+			new ButtonBuilder()
+				.setCustomId('primary')
+				.setLabel('Click me!')
+				.setStyle(ButtonStyle.Primary),
 		);
 
-	await message.reply({ content: 'Button!', components: [row] });
+	await message.reply({ content: 'I think you should,', components: [row] });
 
 	client.on('interactionCreate', interaction => {
 		if (!interaction.isButton()) return;

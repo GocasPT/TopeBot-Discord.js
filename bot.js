@@ -1,5 +1,8 @@
 const { Client, Collection, GatewayIntentBits, Partials } = require('discord.js');
 const { DisTube } = require('distube');
+const { SpotifyPlugin } = require('@distube/spotify')
+const { SoundCloudPlugin } = require('@distube/soundcloud')
+const { YtDlpPlugin } = require('@distube/yt-dlp')
 const { bgBlue, bgYellow, bgGreen, bgCyan } = require('colorette');
 const { readdirSync } = require('fs');
 const { token, emoji } = require('./config.json');
@@ -35,6 +38,13 @@ client.distube = new DisTube(client, {
 	emitNewSongOnly: true,
 	emitAddSongWhenCreatingQueue: false,
 	emitAddListWhenCreatingQueue: false,
+	plugins: [
+		new SpotifyPlugin({
+			emitEventsAfterFetching: true
+		}),
+		new SoundCloudPlugin(),
+		new YtDlpPlugin()
+	]
 });
 
 const status = queue =>

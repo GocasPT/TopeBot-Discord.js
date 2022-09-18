@@ -1,12 +1,12 @@
-const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
 
 exports.run = async (client, message) => {
-	const row = new MessageActionRow()
+	const row = new ActionRowBuilder()
 		.addComponents(
-			new MessageSelectMenu()
+			new SelectMenuBuilder()
 				.setCustomId('select')
 				.setPlaceholder('Nothing selected')
-				.addOptions([
+				.addOptions(
 					{
 						label: 'Select me',
 						description: 'This is a description',
@@ -17,7 +17,7 @@ exports.run = async (client, message) => {
 						description: 'This is also a description',
 						value: 'second_option',
 					},
-				]),
+				),
 		);
 
 	await message.reply({ content: 'Pong!', components: [row] });
