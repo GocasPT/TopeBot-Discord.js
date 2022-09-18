@@ -1,6 +1,6 @@
-const path = require('path');
-const fs = require('fs');
-const { getDir, numberGenerator } = require('../../modules/functions')
+// const path = require('path');
+// const fs = require('fs');
+const { getDir, numberGenerator } = require('../../modules/functions');
 const { MessageAttachment } = require('discord.js');
 
 module.exports = {
@@ -10,16 +10,16 @@ module.exports = {
 	run: async (client, interaction) => {
 		await interaction.reply('Searching a image...');
 
-		let topeDir = '/ImageLibary/Tope';
-		let listTope = [];
+		const topeDir = '/ImageLibary/Tope';
+		const listTope = [];
 
-		getDir(topeDir, listTope)
-		
+		getDir(topeDir, listTope);
+
 		setTimeout(() => {
-			const i = numberGenerator(0, listTope.length-1);
+			const i = numberGenerator(0, listTope.length - 1);
 			const attachment = new MessageAttachment(`${listTope[i]}`);
-			
-			//interaction.delete();
+
+			// interaction.delete();
 			interaction.followUp({ files: [attachment] });
 		}, 50);
 	},

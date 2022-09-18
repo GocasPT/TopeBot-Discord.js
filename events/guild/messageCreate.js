@@ -1,52 +1,46 @@
-const fs = require('fs')
-const time = new Date();
-const config = require("../../config.json");
+const time = new Date().toLocaleString();
+const config = require('../../config.json');
 
 module.exports = async (client, message) => {
-  const { container } = client;
+	const { container } = client;
 
-  if (message.author.bot) return;
+	if (message.author.bot) return;
 
-  const prefixMention = new RegExp(`^<@!?${client.user.id}> ?$`);
-  if (message.content.match(prefixMention)) {
-    return message.reply(`My prefix is \`${config.prefix}\``);
-  }
+	const prefixMention = new RegExp(`^<@!?${client.user.id}> ?$`);
+	if (message.content.match(prefixMention)) {
+		return message.reply(`My prefix is \`${config.prefix}\``);
+	}
 
-  const prefix = new RegExp(`^<@!?${client.user.id}> |^\\${config.prefix}`).exec(message.content);
+	const prefix = new RegExp(`^<@!?${client.user.id}> |^\\${config.prefix}`).exec(message.content);
 
-  if (!prefix) return;
-    
-  const args = message.content.slice(prefix[0].length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase();
+	if (!prefix) return;
 
-  if (message.guild && !message.member) await message.guild.members.fetch(message.author);
+	const args = message.content.slice(prefix[0].length).trim().split(/ +/g);
+	const command = args.shift().toLowerCase();
 
-  const cmd = container.commands.get(command) || container.commands.get(container.aliases.get(command));
+	if (message.guild && !message.member) await message.guild.members.fetch(message.author);
 
-  if (!cmd) return;
+	const cmd = container.commands.get(command) || container.commands.get(container.aliases.get(command));
 
-  if (!cmd.conf.enabled) return;
-  
-  message.flags = [];
-  while (args[0] && args[0][0] === "-") {
-    message.flags.push(args.shift().slice(1));
-  }
+	if (!cmd) return;
 
-  try {
-    await cmd.run(client, message, args);
+	if (!cmd.conf.enabled) return;
 
-    let CommandText = `${message.author.tag} in ${message.guild.name} channel triggered an interaction in ${time}.\n `
+	message.flags = [];
+	while (args[0] && args[0][0] === '-') {
+		message.flags.push(args.shift().slice(1));
+	}
 
-    console.log(CommandText);
-	
-    fs.writeFile('CommandLog.txt', CommandText, { flag: 'a+' }, (err) => {
-      
-      if (err) throw err;
-    })
+	try {
+		await cmd.run(client, message, args);
 
-  } catch (e) {
-    console.error(e);
-    message.channel.send({ content: `There was a problem with your request.\n\`\`\`${e.message}\`\`\`` })
-      .catch(e => console.error("An error occurred replying on an error", e));
-  }
+		const CommandText = `${message.author.tag} in ${message.guild.name} channel triggered an interaction in ${time}.\n `;
+
+		console.log(CommandText);
+	}
+	catch (e) {
+		console.error(e);
+		message.channel.send({ content: `There was a problem with your request.\n\`\`\`${e.message}\`\`\`` });
+		console.error('An error occurred replying on an error', e);
+	}
 };
