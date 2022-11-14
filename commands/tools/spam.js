@@ -6,12 +6,12 @@ exports.run = (client, message) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['spam'],
 };
 
 exports.help = {
 	name: 'spam',
 	category: 'Tools',
-	description: 'Spama...',
+	description: 'Spama todas as pessoas do servidor',
 	usage: 'spam',
 };

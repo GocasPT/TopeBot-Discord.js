@@ -10,12 +10,12 @@ exports.run = (client, message, args) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: ['p'],
+	aliases: ['play', 'p'],
 };
 
 exports.help = {
 	name: 'play',
 	category: 'Music',
-	description: 'Play...',
+	description: 'Play the song giving by text or URL (Youtub, spotify and more)',
 	usage: 'play',
 };

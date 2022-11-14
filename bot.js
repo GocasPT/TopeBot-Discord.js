@@ -77,7 +77,7 @@ const init = async () => {
 		});
 	});
 
-	// Search a load the events
+	// Search the discord's events
 	const loadEvent = dirs => {
 		const events = readdirSync(`./events/${dirs}/`).filter(d => d.endsWith('js'));
 		for (const file of events) {
@@ -90,6 +90,7 @@ const init = async () => {
 	};
 	['client', 'guild'].forEach((x) => loadEvent(x));
 
+	// Search the music's events
 	const loadMusic = () => {
 		const events = readdirSync(`./events/music/`).filter(d => d.endsWith('js'));
 		for (const file of events) {
@@ -101,6 +102,8 @@ const init = async () => {
 		}
 	};
 	['music'].forEach((x) => loadMusic(x));
+
+	
 
 	client.login(token);
 };

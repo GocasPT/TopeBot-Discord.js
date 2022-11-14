@@ -4,12 +4,12 @@ exports.run = (client, message) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['ping'],
 };
 
 exports.help = {
 	name: 'ping',
 	category: 'Info',
-	description: 'Give a Pong',
+	description: 'Give a Pong, just a Pong',
 	usage: 'ping',
 };

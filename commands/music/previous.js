@@ -7,12 +7,12 @@ exports.run = (client, message) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['previous'],
 };
 
 exports.help = {
 	name: 'previous',
 	category: 'Music',
-	description: 'Previous...',
+	description: 'Play the previous song from queue',
 	usage: 'previous',
 };

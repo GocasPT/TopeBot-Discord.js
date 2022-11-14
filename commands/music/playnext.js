@@ -11,12 +11,12 @@ exports.run = (client, message, args) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: ['next', 'pn'],
+	aliases: ['playnext', 'next', 'pn'],
 };
 
 exports.help = {
 	name: 'playnext',
 	category: 'Music',
-	description: 'playnext...',
+	description: 'Add song to play next, ignoring the queue',
 	usage: 'playnext',
 };

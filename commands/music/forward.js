@@ -12,12 +12,12 @@ exports.run = (client, message, args) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['forward', 'fw'],
 };
 
 exports.help = {
 	name: 'forward',
 	category: 'Music',
-	description: 'Forward...',
+	description: 'Forward, in seconds, on the song now playing',
 	usage: 'forward',
 };

@@ -58,12 +58,12 @@ exports.run = (client, message) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: ['np'],
+	aliases: ['nowplaying', 'np'],
 };
 
 exports.help = {
 	name: 'nowplaying',
 	category: 'Music',
-	description: 'Now playing...',
+	description: 'Show the song that is playing now',
 	usage: 'nowplaying',
 };

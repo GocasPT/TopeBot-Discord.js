@@ -18,12 +18,12 @@ exports.run = async (client, message, args) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['join'],
 };
 
 exports.help = {
 	name: 'join',
 	category: 'Music',
-	description: 'Join...',
+	description: 'Join the voice channel where you are in the moment',
 	usage: 'join',
 };

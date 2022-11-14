@@ -15,12 +15,12 @@ exports.run = (client, message, args) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['chamar'],
 };
 
 exports.help = {
 	name: 'chamar',
 	category: 'Tools',
-	description: 'Chama...',
+	description: 'Chama as pessoa mensionada',
 	usage: 'chamar',
 };

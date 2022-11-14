@@ -4,12 +4,12 @@ exports.run = (client, message) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['leave'],
 };
 
 exports.help = {
 	name: 'leave',
 	category: 'Music',
-	description: 'Leave...',
+	description: 'Leave the voice channel where you are',
 	usage: 'leave',
 };

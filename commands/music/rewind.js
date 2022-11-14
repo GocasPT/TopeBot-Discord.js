@@ -12,12 +12,12 @@ exports.run = (client, message, args) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['rewind'],
 };
 
 exports.help = {
 	name: 'rewind',
 	category: 'Music',
-	description: 'Rewind...',
+	description: 'Rewind, in seconds, the song',
 	usage: 'rewind',
 };

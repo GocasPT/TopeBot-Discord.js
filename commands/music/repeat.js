@@ -12,6 +12,9 @@ exports.run = (client, message, args) => {
       case 'queue':
         mode = 2
         break
+      default:
+        mode = 1;
+        break;
     }
     mode = queue.setRepeatMode(mode)
     mode = mode ? (mode === 2 ? 'Repeat queue' : 'Repeat song') : 'Off'
@@ -20,12 +23,12 @@ exports.run = (client, message, args) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['repeat', 'loop', 'l'],
 };
 
 exports.help = {
 	name: 'repeat',
 	category: 'Music',
-	description: 'Repeat...',
+	description: 'Repeat the song or queue in loop',
 	usage: 'repeat',
 };

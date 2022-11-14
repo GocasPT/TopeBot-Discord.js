@@ -21,7 +21,7 @@ exports.run = async (client, message) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: ['frase'],
+	aliases: ['quote', 'frase'],
 };
 
 exports.help = {

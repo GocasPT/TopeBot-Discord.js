@@ -11,12 +11,12 @@ exports.run = (client, message) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['pause'],
 };
 
 exports.help = {
 	name: 'pause',
 	category: 'Music',
-	description: 'Pause...',
+	description: 'Pause the song',
 	usage: 'pause',
 };

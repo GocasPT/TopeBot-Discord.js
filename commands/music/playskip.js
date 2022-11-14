@@ -11,12 +11,12 @@ exports.run = (client, message, args) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: ['ps'],
+	aliases: ['playskip', 'ps'],
 };
 
 exports.help = {
 	name: 'playskip',
 	category: 'Music',
-	description: 'Play skip...',
+	description: 'Play the song enter, ignoring the the song playing now',
 	usage: 'playskip',
 };

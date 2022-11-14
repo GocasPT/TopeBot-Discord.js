@@ -64,7 +64,7 @@ exports.run = async (client, message) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['stats'],
 };
 
 exports.help = {

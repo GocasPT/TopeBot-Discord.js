@@ -27,6 +27,6 @@ exports.conf = {
 exports.help = {
 	name: 'image',
 	category: 'Fun',
-	description: 'Random image from tope',
+	description: 'Random image from tope in is libary',
 	usage: 'image',
 };

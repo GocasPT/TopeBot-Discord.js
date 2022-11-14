@@ -12,12 +12,12 @@ exports.run = (client, message, args) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['seek'],
 };
 
 exports.help = {
 	name: 'seek',
 	category: 'Music',
-	description: 'Seek...',
+	description: 'Jump to the timew set the song',
 	usage: 'seek',
 };

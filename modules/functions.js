@@ -96,4 +96,10 @@ process.on('unhandledRejection', err => {
 	console.error(err);
 });
 
-module.exports = { awaitReply, getDir, subtractTimeString, toProperCase, numberGenerator };
+module.exports = { 
+	awaitReply, 
+	getDir, 
+	subtractTimeString, 
+	toProperCase, 
+	numberGenerator 
+};

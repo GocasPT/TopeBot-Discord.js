@@ -31,12 +31,12 @@ exports.run = async (client, message) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['menu'],
 };
 
 exports.help = {
 	name: 'menu',
 	category: 'Test',
-	description: 'Test slect menu',
+	description: 'Test select menu',
 	usage: 'menu',
 };

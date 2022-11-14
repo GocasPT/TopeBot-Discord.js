@@ -7,12 +7,12 @@ exports.run = (client, message) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['autuplay', 'auto'],
 };
 
 exports.help = {
 	name: 'autoplay',
 	category: 'Music',
-	description: 'Auto play...',
+	description: 'Toggle the Autoplay mode. Autoplay mode is whene the song end, is add a new play on the queue base on previous',
 	usage: 'autoplay',
 };

@@ -7,12 +7,12 @@ exports.run = (client, message) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['stop'],
 };
 
 exports.help = {
 	name: 'stop',
 	category: 'Music',
-	description: 'Stop...',
+	description: 'Stop the queue',
 	usage: 'stop',
 };

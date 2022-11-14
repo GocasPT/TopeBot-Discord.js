@@ -9,12 +9,12 @@ exports.run = (client, message, args) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: ['v'],
+	aliases: ['volume', 'v'],
 };
 
 exports.help = {
 	name: 'volume',
 	category: 'Music',
-	description: 'Volume...',
+	description: 'Set the volume (don\' exit the max volume)',
 	usage: 'volume',
 };

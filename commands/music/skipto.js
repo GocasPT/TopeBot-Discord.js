@@ -13,12 +13,12 @@ exports.run = async (client, message, args) => {
 
 exports.conf = {
 	enabled: true,
-	aliases: [],
+	aliases: ['skipto'],
 };
 
 exports.help = {
 	name: 'skipto',
 	category: 'Music',
-	description: 'Skip to...',
+	description: 'Skip to the number of song you want',
 	usage: 'skipto',
 };
