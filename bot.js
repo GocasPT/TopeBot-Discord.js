@@ -48,7 +48,7 @@ client.distube = new DisTube(client, {
 });
 
 const status = queue =>
-  `Volume: \`${queue.volume = 25}%\` | Filter: \`${queue.filters.names.join(', ') || 'Off'}\` | Loop: \`${
+  `Volume: \`${queue.volume = 100}%\` | Filter: \`${queue.filters.names.join(', ') || 'Off'}\` | Loop: \`${
     queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'
   }\` | Autoplay: \`${queue.autoplay ? 'On' : 'Off'}\``
 
@@ -102,8 +102,6 @@ const init = async () => {
 		}
 	};
 	['music'].forEach((x) => loadMusic(x));
-
-	
 
 	client.login(token);
 };
