@@ -6,7 +6,12 @@
   "scripts": {
     "start": "node bot.js",
     "upload": "node deploy-commands.js",
-    "dev": "nodemon bot.js"
+    "dev": "nodemon bot.js",
+    "lint": "npx bot.js",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "npx prettier bot.js --check",
+    "prettier:fix": "npm run prettier -- --write",
+    "format": "npm run prettier:fix && npm run lint:fix"
   },
   "repository": {
     "type": "git",
@@ -47,6 +52,9 @@
     "ytdl-core": "^4.11.2"
   },
   "devDependencies": {
-    "eslint": "^8.23.1"
+    "eslint": "^8.33.0",
+    "prettier": "2.8.3",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1"
   }
 }
