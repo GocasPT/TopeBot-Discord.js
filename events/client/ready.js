@@ -9,7 +9,10 @@ module.exports = async (client) => {
 		'ready'
 	);
 
-	client.user.setActivity(`${config.prefix}help, olhem que os exames estão à porta e vocês precissão da minha ajuda`, {
-		type: 'PLAYING',
-	});
+	client.user.setActivity(
+		`${config.prefix}help, olhem que os exames estão à porta e vocês precissão da minha ajuda`,
+		{
+			type: 'PLAYING',
+		}
+	);
 };

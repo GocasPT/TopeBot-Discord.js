@@ -15,9 +15,9 @@ module.exports = {
 			.setColor('RANDOM')
 			.setTimestamp()
 			.setDescription(
-				`**Time:** ${Math.floor(msg.createdTimestamp - interaction.createdTimestamp)} ms\n**API Ping:** ${
-					client.ws.ping
-				} ms`
+				`**Time:** ${Math.floor(
+					msg.createdTimestamp - interaction.createdTimestamp
+				)} ms\n**API Ping:** ${client.ws.ping} ms`
 			);
 		interaction.editReply({
 			embeds: [embed],

@@ -6,13 +6,18 @@ function generateQueueEmbed(queue) {
 	for (let i = 0; i < queue.songs.length; i += 10) {
 		const current = queue.songs.slice(i, i + 10);
 		const info = current
-			.map((track, j) => `${i + j + 1} - ${hyperlink(track.name, track.url)} [\`${track.formattedDuration}\`]`)
+			.map(
+				(track, j) =>
+					`${i + j + 1} - ${hyperlink(track.name, track.url)} [\`${track.formattedDuration}\`]`
+			)
 			.join('\n');
 		const embed = new EmbedBuilder()
 			.setColor('0xfaff67')
 			.setTitle('Song Queue')
 			.setFooter({ text: `${new Date().toLocaleDateString()}` })
-			.setDescription(`**Current Song - ${hyperlink(queue.songs[0].name, queue.songs[0].url)}**\n${info}`);
+			.setDescription(
+				`**Current Song - ${hyperlink(queue.songs[0].name, queue.songs[0].url)}**\n${info}`
+			);
 
 		embedList.push(embed);
 	}
@@ -35,14 +40,17 @@ exports.run = async (client, message) => {
 	await queueMessage.react('⬅️');
 	await queueMessage.react('➡️');
 
-	const filter = (reaction, user) => ['⬅️', '➡️'].includes(reaction.emoji.name) && user.id === message.author.id;
+	const filter = (reaction, user) =>
+		['⬅️', '➡️'].includes(reaction.emoji.name) && user.id === message.author.id;
 	const collector = queueMessage.createReactionCollector({
 		filter,
 		time: 60_000,
 	});
 
 	collector.on('collect', async (reaction, user) => {
-		const userReactions = queueMessage.reactions.cache.filter((reaction) => reaction.users.cache.has(user.id));
+		const userReactions = queueMessage.reactions.cache.filter((reaction) =>
+			reaction.users.cache.has(user.id)
+		);
 		collector.resetTimer({ time: 60_000 });
 
 		if (reaction.emoji.name === '➡️') {

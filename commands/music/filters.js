@@ -4,10 +4,16 @@ let filtersList = '';
 
 exports.run = async (client, message, args) => {
 	const queue = client.distube.getQueue(message);
-	if (!queue) return message.channel.send(`${client.emotes.error} | There is nothing in the queue right now!`);
+	if (!queue)
+		return message.channel.send(
+			`${client.emotes.error} | There is nothing in the queue right now!`
+		);
 
 	if (!args[0]) {
-		const menu = new SelectMenuBuilder().setCustomId('select').setPlaceholder('Nothing selected').setMaxValues(1);
+		const menu = new SelectMenuBuilder()
+			.setCustomId('select')
+			.setPlaceholder('Nothing selected')
+			.setMaxValues(1);
 
 		for (const filter in client.distube.filters) {
 			filtersList += `→${filter}\n`;

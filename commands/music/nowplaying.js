@@ -4,7 +4,10 @@ const { subtractTimeString } = require('../../modules/functions');
 
 exports.run = (client, message) => {
 	const queue = client.distube.getQueue(message);
-	if (!queue) return message.channel.send(`${client.emotes.error} | There is nothing in the queue right now!`);
+	if (!queue)
+		return message.channel.send(
+			`${client.emotes.error} | There is nothing in the queue right now!`
+		);
 	const song = queue.songs[0];
 
 	let songDuration = song.formattedDuration;
