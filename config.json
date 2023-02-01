@@ -1,13 +1,13 @@
 {
-	"clientId": "725474747059535966",
-	"token": "token",
-	"prefix": "_",
-	"emoji": {
-		"play": "▶️",
-    	"stop": "⏹️",
-    	"queue": "📄",
-    	"success": "☑️",
-    	"repeat": "🔁",
-    	"error": "❌"
-	}
+  "clientId": "725474747059535966",
+  "token": "token",
+  "prefix": "_",
+  "emoji": {
+    "play": "▶️",
+    "stop": "⏹️",
+    "queue": "📄",
+    "success": "☑️",
+    "repeat": "🔁",
+    "error": "❌"
+  }
 }

@@ -1,81 +1,81 @@
 const { EmbedBuilder, hyperlink } = require('discord.js');
 
-function generateQueueEmbed(queue){
-	const embeds = [];
-	let k = 10;
-	for(let i = 0; i < queue.length; i += 10){
-		const current = queue.slice(i, k);
-		let j = i;
-		k += 10;
-		const info = current.map(track => `${j} - ${hyperlink(track.name, track.url)} [\`${track.formattedDuration}\`]\n`)
+function generateQueueEmbed(queue) {
+	const embedList = [];
+
+	for (let i = 0; i < queue.songs.length; i += 10) {
+		const current = queue.songs.slice(i, i + 10);
+		const info = current
+			.map((track, j) => `${i + j + 1} - ${hyperlink(track.name, track.url)} [\`${track.formattedDuration}\`]`)
+			.join('\n');
 		const embed = new EmbedBuilder()
-			.setDescription(`**Current Song - ${hyperlink(queue[0].name, queue[0].url)}**\n${info}`)
-		embeds.push(embed)
+			.setColor('0xfaff67')
+			.setTitle('Song Queue')
+			.setFooter({ text: `${new Date().toLocaleDateString()}` })
+			.setDescription(`**Current Song - ${hyperlink(queue.songs[0].name, queue.songs[0].url)}**\n${info}`);
+
+		embedList.push(embed);
 	}
-	return embeds;
+
+	return embedList;
 }
 
-exports.run = (client, message) => {
-	//let queueList = "";
-	const queueuEmbed = new EmbedBuilder()
-		.setColor('0xfaff67')
-		.setTitle('Song Queue')
-		.setFooter({ text: `${new Date().toLocaleDateString()}` })
+exports.run = async (client, message) => {
+	const queue = client.distube.getQueue(message);
 
-	const queue = client.distube.getQueue(message)
-    if (!queue) return message.channel.send(`${client.emotes.error} | There is nothing playing!`)
-    /* queue.songs.forEach((song, i) => {
-		if (i==0) {
-			queueuEmbed.setDescription(`**Current Song - ${hyperlink(song.name, song.url)}**`)
+	if (!queue) return message.channel.send("I don't have a queue...");
+
+	const queueEmbeds = generateQueueEmbed(queue);
+	let currentPage = 0;
+	const queueMessage = await message.channel.send({
+		content: `Current Page: ${currentPage + 1}/${queueEmbeds.length}\n`,
+		embeds: [queueEmbeds[currentPage]],
+	});
+
+	await queueMessage.react('⬅️');
+	await queueMessage.react('➡️');
+
+	const filter = (reaction, user) => ['⬅️', '➡️'].includes(reaction.emoji.name) && user.id === message.author.id;
+	const collector = queueMessage.createReactionCollector({
+		filter,
+		time: 60_000,
+	});
+
+	collector.on('collect', async (reaction, user) => {
+		const userReactions = queueMessage.reactions.cache.filter((reaction) => reaction.users.cache.has(user.id));
+		collector.resetTimer({ time: 60_000 });
+
+		if (reaction.emoji.name === '➡️') {
+			if (currentPage < queueEmbeds.length - 1) {
+				currentPage++;
+				queueMessage.edit({
+					content: `Current Page: ${currentPage + 1}/${queueEmbeds.length}`,
+					embeds: [queueEmbeds[currentPage]],
+				});
+			}
+		} else if (currentPage !== 0) {
+			currentPage--;
+			queueMessage.edit({
+				content: `Current Page: ${currentPage + 1}/${queueEmbeds.length}`,
+				embeds: [queueEmbeds[currentPage]],
+			});
 		}
-		else {
-				queueList = queueList + `${i} - ${hyperlink(song.name, song.url)} [\`${song.formattedDuration}\`]\n`
+
+		try {
+			for (const reaction of userReactions.values()) {
+				await reaction.users.remove(user.id);
+			}
+		} catch (error) {
+			console.error('Failed to remove reactions.');
 		}
 	});
 
-	if (queue.autoplay) queueList = "Modo: *autoplay*"
-	else if (queueList === "") queueList = "Nada";
-
-	queueuEmbed.addFields({
-		name: '\u200B',
-		value: `${queueList}`
-	}) */
-
-	let currentPage = 0;
-	const embeds = generateQueueEmbed(queue);
-	const queueEmbed = message.channel.send(`Current Page: ${currentPage+1}/${embeds.length}`, embeds[currentPage]);
-	queueEmbed.react('⬅️');
-	queueEmbed.react('➡️');
-
-	const filter = (reaction, user) => {
-		return ['⬅️', '➡️'].includes(reaction.emoji.name) && user.id === user.id;
-	}
-
-	message.awaitReactions({ filter, max: 1 })
-		.then(collected => {
-			const reaction = collected.first();
-
-			if (reaction.emoji.name === '➡️') {
-				if(currentPage < embeds.length-1){
-					currentPage++
-					queueEmbed.edit(`Current Page: ${currentPage+1}/${embeds.length}`, embeds[currentPage])
-				}
-			} else {
-				if(currentPage !== 0){
-					--currentPage
-					queueEmbed.edit(`Current Page: ${currentPage+1}/${embeds.length}`, embeds[currentPage])
-				}
-			}
-		})
-
-
-	message.channel.send({ embeds: [queueuEmbed] })
+	collector.on('end', () => {
+		queueMessage.reactions.removeAll();
+	});
 };
 
-exports.conf = {
-	enabled: true,
-	aliases: ['queue', 'q'],
-};
+exports.conf = { enabled: true, aliases: ['queue', 'q'] };
 
 exports.help = {
 	name: 'queue',
