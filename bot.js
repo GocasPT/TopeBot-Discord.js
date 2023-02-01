@@ -1,8 +1,8 @@
 const { Client, Collection, GatewayIntentBits, Partials } = require('discord.js');
 const { DisTube } = require('distube');
-const { SpotifyPlugin } = require('@distube/spotify')
-const { SoundCloudPlugin } = require('@distube/soundcloud')
-const { YtDlpPlugin } = require('@distube/yt-dlp')
+const { SpotifyPlugin } = require('@distube/spotify');
+const { SoundCloudPlugin } = require('@distube/soundcloud');
+const { YtDlpPlugin } = require('@distube/yt-dlp');
 const { bgBlue, bgYellow, bgGreen, bgCyan } = require('colorette');
 const { readdirSync } = require('fs');
 const { emoji } = require('./config.json');
@@ -14,11 +14,12 @@ const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.GuildMessageReactions,
 		GatewayIntentBits.MessageContent,
 		GatewayIntentBits.GuildMembers,
 		GatewayIntentBits.GuildVoiceStates,
 	],
-	partials: [Partials.Channel],
+	partials: [Partials.Channel, Partials.Reaction],
 });
 
 // Set commands, slash commands and eventes on containers
@@ -37,40 +38,40 @@ client.container = {
 client.distube = new DisTube(client, {
 	leaveOnStop: false,
 	emitNewSongOnly: true,
-	emitAddSongWhenCreatingQueue: false,
-	emitAddListWhenCreatingQueue: false,
+	emitAddSongWhenCreatingQueue: true,
+	emitAddListWhenCreatingQueue: true,
 	plugins: [
-		new SpotifyPlugin({
-			emitEventsAfterFetching: true
-		}),
+		new SpotifyPlugin({ emitEventsAfterFetching: true }),
 		new SoundCloudPlugin(),
-		new YtDlpPlugin()
-	]
+		new YtDlpPlugin(),
+	],
 });
 
-const status = queue =>
-  `Volume: \`${queue.volume = 25}%\` | Filter: \`${queue.filters.names.join(', ') || 'Off'}\` | Loop: \`${
-    queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'
-  }\` | Autoplay: \`${queue.autoplay ? 'On' : 'Off'}\``
+const status = (queue) =>
+	`Volume: \`${(queue.volume = 100)}%\` | Filter: \`${
+		queue.filters.names.join(', ') || 'Off'
+	}\` | Loop: \`${
+		queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'
+	}\` | Autoplay: \`${queue.autoplay ? 'On' : 'Off'}\``;
 
 // Initialization funciotn
 const init = async () => {
 	// Search a load the commands
-	readdirSync('./commands/').map(async dir => {
-		readdirSync(`./commands/${dir}/`).map(async cmd => {
+	readdirSync('./commands/').map(async (dir) => {
+		readdirSync(`./commands/${dir}/`).map(async (cmd) => {
 			const props = require(`./commands/${dir}/${cmd}`);
 			logger.log(`Loading ${bgBlue('Command')}: ${props.help.name}`, 'log');
 			client.container.commands.set(props.help.name, props);
 
-			props.conf.aliases.forEach(alias => {
+			props.conf.aliases.forEach((alias) => {
 				client.container.aliases.set(alias, props.help.name);
 			});
 		});
 	});
 
 	// Search a load the slash commands
-	readdirSync('./slash').map(async dir => {
-		readdirSync(`./slash/${dir}/`).map(async cmd => {
+	readdirSync('./slash').map(async (dir) => {
+		readdirSync(`./slash/${dir}/`).map(async (cmd) => {
 			const props = require(`./slash/${dir}/${cmd}`);
 			logger.log(`Loading ${bgYellow('Slash command')}: ${props.name}`, 'log');
 
@@ -79,8 +80,8 @@ const init = async () => {
 	});
 
 	// Search the discord's events
-	const loadEvent = dirs => {
-		const events = readdirSync(`./events/${dirs}/`).filter(d => d.endsWith('js'));
+	const loadEvent = (dirs) => {
+		const events = readdirSync(`./events/${dirs}/`).filter((d) => d.endsWith('js'));
 		for (const file of events) {
 			const event = require(`./events/${dirs}/${file}`);
 			const eventName = file.split('.')[0];
@@ -93,7 +94,7 @@ const init = async () => {
 
 	// Search the music's events
 	const loadMusic = () => {
-		const events = readdirSync(`./events/music/`).filter(d => d.endsWith('js'));
+		const events = readdirSync('./events/music/').filter((d) => d.endsWith('js'));
 		for (const file of events) {
 			const event = require(`./events/music/${file}`);
 			const eventName = file.split('.')[0];
@@ -103,8 +104,6 @@ const init = async () => {
 		}
 	};
 	['music'].forEach((x) => loadMusic(x));
-
-	
 
 	client.login(token);
 };

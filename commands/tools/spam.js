@@ -1,13 +1,10 @@
 exports.run = (client, message) => {
-    for(let i = 0; i < 5; i++){
-        message.channel.send(`@everyone`);
-    }
+	for (let i = 0; i < 5; i++) {
+		message.channel.send('@everyone');
+	}
 };
 
-exports.conf = {
-	enabled: true,
-	aliases: ['spam'],
-};
+exports.conf = { enabled: true, aliases: ['spam'] };
 
 exports.help = {
 	name: 'spam',

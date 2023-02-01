@@ -1,10 +1,46 @@
 {
-	"extends": "eslint:recommended",
-	"env": {
-		"node": true,
-		"es6": true
-	},
-	"parserOptions": {
-		"ecmaVersion": 2021
-	}
+  "env": {
+    "browser": true,
+    "node": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "extends": ["prettier", "eslint:recommended"],
+  "plugins": ["prettier"],
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+    "prettier/prettier": [ 
+      "error", {
+        "useTabs": true,
+        "singleQuote": true,
+        "printWidth": 100,
+        "proseWrap": "never",
+        "resolveGlobalModules": true,
+        "requireConfig": true
+      }
+  ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "import/prefer-default-export": "off",
+    "jsx-quotes": [
+      "error",
+      "prefer-single"
+    ],
+    "no-empty": "error",
+    "no-irregular-whitespace": "error",
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1
+      }
+    ]
+  }
 }

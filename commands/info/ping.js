@@ -2,10 +2,7 @@ exports.run = (client, message) => {
 	message.channel.send('Pong!');
 };
 
-exports.conf = {
-	enabled: true,
-	aliases: ['ping'],
-};
+exports.conf = { enabled: true, aliases: ['ping'] };
 
 exports.help = {
 	name: 'ping',

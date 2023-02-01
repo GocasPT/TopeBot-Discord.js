@@ -1,14 +1,14 @@
 exports.run = (client, message) => {
-	const queue = client.distube.getQueue(message)
-    if (!queue) return message.channel.send(`${client.emotes.error} | There is nothing in the queue right now!`)
-    queue.stop()
-    message.channel.send(`${client.emotes.success} | Stopped!`)
+	const queue = client.distube.getQueue(message);
+	if (!queue)
+		return message.channel.send(
+			`${client.emotes.error} | There is nothing in the queue right now!`
+		);
+	queue.stop();
+	message.channel.send(`${client.emotes.success} | Stopped!`);
 };
 
-exports.conf = {
-	enabled: true,
-	aliases: ['stop'],
-};
+exports.conf = { enabled: true, aliases: ['stop'] };
 
 exports.help = {
 	name: 'stop',
