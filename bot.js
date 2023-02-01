@@ -5,7 +5,8 @@ const { SoundCloudPlugin } = require('@distube/soundcloud')
 const { YtDlpPlugin } = require('@distube/yt-dlp')
 const { bgBlue, bgYellow, bgGreen, bgCyan } = require('colorette');
 const { readdirSync } = require('fs');
-const { token, emoji } = require('./config.json');
+const { emoji } = require('./config.json');
+const { token } = require('./env.json');
 const logger = require('./modules/logger.js');
 
 // Cliente Discord part
