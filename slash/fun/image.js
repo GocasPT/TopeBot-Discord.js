@@ -1,7 +1,7 @@
 // const path = require('path');
 // const fs = require('fs');
-const { getDir, numberGenerator } = require('../../modules/functions');
 const { MessageAttachment } = require('discord.js');
+const { getDir, numberGenerator } = require('../../modules/functions');
 
 module.exports = {
 	name: 'image',

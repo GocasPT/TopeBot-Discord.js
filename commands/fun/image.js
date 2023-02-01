@@ -1,5 +1,5 @@
-const { getDir, numberGenerator } = require('../../modules/functions');
 const { AttachmentBuilder } = require('discord.js');
+const { getDir, numberGenerator } = require('../../modules/functions');
 
 exports.run = async (client, message) => {
 	const msg = await message.reply('Searching a image...');
@@ -19,10 +19,7 @@ exports.run = async (client, message) => {
 	}, 50);
 };
 
-exports.conf = {
-	enabled: true,
-	aliases: ['imagem'],
-};
+exports.conf = { enabled: true, aliases: ['imagem'] };
 
 exports.help = {
 	name: 'image',

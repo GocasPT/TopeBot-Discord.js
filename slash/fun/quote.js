@@ -1,5 +1,5 @@
-const { getDir, numberGenerator } = require('../../modules/functions');
 const { MessageAttachment } = require('discord.js');
+const { getDir, numberGenerator } = require('../../modules/functions');
 
 module.exports = {
 	name: 'quote',

@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require('discord.js');
+const path = require('path');
 const { getDir } = require('../../modules/functions');
 const emojiFolder = require('../../modules/emojiFolder.json');
-const path = require('path');
 
 exports.run = async (client, message, args) => {
 	const thumbnail = client.user.avatarURL();
@@ -15,24 +15,28 @@ exports.run = async (client, message, args) => {
 
 	const helpEmbed = new EmbedBuilder()
 		.setTitle('Dynamic Help Menu')
-		.setAuthor({ name: 'Topebot', avatarURL: thumbnail, url: 'https://github.com/GocasPT/TopeBot-Discord.js' })
-		.setThumbnail(thumbnail)
+		.setAuthor({
+			name: 'Topebot',
+			avatarURL: thumbnail,
+			url: 'https://github.com/GocasPT/TopeBot-Discord.js',
+		})
+		.setThumbnail(thumbnail);
 
 	if (args.length == 1) {
-		let i
+		let i;
 		for (i = 0; i < foldersList.length; i++) {
 			const folderName = path.basename(foldersList[i]);
 			if (args[0] == folderName) {
 				const newDir = path.join(commandDir, folderName);
-				
+
 				await getDir(newDir, categoryFolderList);
 
 				emoji = emojiFolder[`${folderName}`];
-				helpEmbed.setTitle(`Dynamic Help Menu - ${emoji} ${folderName}`)
+				helpEmbed.setTitle(`Dynamic Help Menu - ${emoji} ${folderName}`);
 
 				if (!categoryFolderList.length) {
-					helpEmbed.setDescription(`***Nada***`);
-					break
+					helpEmbed.setDescription('***Nada***');
+					break;
 				}
 
 				for (const commandFile of categoryFolderList) {
@@ -40,8 +44,8 @@ exports.run = async (client, message, args) => {
 				}
 
 				helpEmbed.setDescription(`**→ ${commandsArray.join('\n→ ')}**`);
-				break
-			} 
+				break;
+			}
 		}
 
 		if (i == foldersList.length) {
@@ -49,37 +53,35 @@ exports.run = async (client, message, args) => {
 				const folderName = path.basename(foldersList[i]);
 
 				const newDir = path.join(commandDir, folderName);
-				
+
 				await getDir(newDir, categoryFolderList);
 
 				emoji = emojiFolder[`${folderName}`];
 
 				if (!categoryFolderList.length) {
-					continue
+					continue;
 				}
 
 				for (const commandFile of categoryFolderList) {
-					let commandFileName = path.basename(commandFile).slice(0, -3);
-					if(args[0] == commandFileName){
+					const commandFileName = path.basename(commandFile).slice(0, -3);
+					if (args[0] == commandFileName) {
 						const props = require(commandFile);
-						helpEmbed.setTitle(`Dynamic Help Menu - ${commandFileName}`)
-						helpEmbed.setDescription(`Desciption: ${props.help.description}\n Alieses: ${props.conf.aliases}\n Category: ${props.help.category}`);
-						break
+						helpEmbed.setTitle(`Dynamic Help Menu - ${commandFileName}`);
+						helpEmbed.setDescription(
+							`Desciption: ${props.help.description}\n Alieses: ${props.conf.aliases}\n Category: ${props.help.category}`
+						);
+						break;
 					}
 				}
 			}
 
 			if (i == foldersList.length) {
-				return message.channel.send("Não existe essa categoria ou comando com esse nome")
+				return message.channel.send('Não existe essa categoria ou comando com esse nome');
 			}
 		}
-
-	}
-	else if (args.length >= 2) {
+	} else if (args.length >= 2) {
 		return message.reply('Introdusa uma categoria ou um comando');
-
-	}
-	else {
+	} else {
 		for (let i = 0; i < foldersList.length; i++) {
 			const folderName = path.basename(foldersList[i]);
 			const newDir = path.join(commandDir, folderName);
@@ -89,14 +91,21 @@ exports.run = async (client, message, args) => {
 			emoji = emojiFolder[`${folderName}`];
 
 			if (!categoryFolderList.length) {
-				helpEmbed.addFields({ name: `**${emoji} ${folderName}**`, value: `*Nada*`, inline: true });
-			}
-			else {
+				helpEmbed.addFields({
+					name: `**${emoji} ${folderName}**`,
+					value: '*Nada*',
+					inline: true,
+				});
+			} else {
 				for (const commandFile of categoryFolderList) {
 					commandsArray.push(path.basename(commandFile).slice(0, -3));
 				}
 
-				helpEmbed.addFields({ name: `**${emoji} ${folderName}**`, value: `\`${commandsArray.join(', ')}\``, inlie: true });
+				helpEmbed.addFields({
+					name: `**${emoji} ${folderName}**`,
+					value: `\`${commandsArray.join(', ')}\``,
+					inlie: true,
+				});
 			}
 
 			categoryFolderList = [];
@@ -107,10 +116,7 @@ exports.run = async (client, message, args) => {
 	message.channel.send({ embeds: [helpEmbed] });
 };
 
-exports.conf = {
-	enabled: true,
-	aliases: [],
-};
+exports.conf = { enabled: true, aliases: [] };
 
 exports.help = {
 	name: 'help',

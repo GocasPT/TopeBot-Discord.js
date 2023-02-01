@@ -1,61 +1,64 @@
 const { EmbedBuilder, hyperlink } = require('discord.js');
 
-function generateQueueEmbed(queue){
+function generateQueueEmbed(queue) {
 	const embedList = [];
 
-	for(let i = 0; i < queue.songs.length; i += 10){
+	for (let i = 0; i < queue.songs.length; i += 10) {
 		const current = queue.songs.slice(i, i + 10);
-		const info = current.map((track, j) => `${i+j+1} - ${hyperlink(track.name, track.url)} [\`${track.formattedDuration}\`]`).join('\n');
+		const info = current
+			.map((track, j) => `${i + j + 1} - ${hyperlink(track.name, track.url)} [\`${track.formattedDuration}\`]`)
+			.join('\n');
 		const embed = new EmbedBuilder()
 			.setColor('0xfaff67')
 			.setTitle('Song Queue')
 			.setFooter({ text: `${new Date().toLocaleDateString()}` })
 			.setDescription(`**Current Song - ${hyperlink(queue.songs[0].name, queue.songs[0].url)}**\n${info}`);
 
-			embedList.push(embed)
+		embedList.push(embed);
 	}
 
 	return embedList;
 }
 
-exports.run = async(client, message) => {
+exports.run = async (client, message) => {
 	const queue = client.distube.getQueue(message);
 
-	if(!queue) return message.channel.send("I don't have a queue...");
+	if (!queue) return message.channel.send("I don't have a queue...");
 
 	const queueEmbeds = generateQueueEmbed(queue);
 	let currentPage = 0;
-	let queueMessage = await message.channel.send({ 
+	const queueMessage = await message.channel.send({
 		content: `Current Page: ${currentPage + 1}/${queueEmbeds.length}\n`,
-		embeds: [queueEmbeds[currentPage]] 
+		embeds: [queueEmbeds[currentPage]],
 	});
 
 	await queueMessage.react('⬅️');
 	await queueMessage.react('➡️');
 
-	const filter = (reaction, user) => ['⬅️', '➡️'].includes(reaction.emoji.name) && (user.id === message.author.id);
-	const collector = queueMessage.createReactionCollector({ filter, time: 60_000 });
-	
+	const filter = (reaction, user) => ['⬅️', '➡️'].includes(reaction.emoji.name) && user.id === message.author.id;
+	const collector = queueMessage.createReactionCollector({
+		filter,
+		time: 60_000,
+	});
+
 	collector.on('collect', async (reaction, user) => {
-		const userReactions = queueMessage.reactions.cache.filter(reaction => reaction.users.cache.has(user.id));
-		collector.resetTimer({ time:60_000});
+		const userReactions = queueMessage.reactions.cache.filter((reaction) => reaction.users.cache.has(user.id));
+		collector.resetTimer({ time: 60_000 });
 
 		if (reaction.emoji.name === '➡️') {
-			if(currentPage < queueEmbeds.length - 1){
+			if (currentPage < queueEmbeds.length - 1) {
 				currentPage++;
-				queueMessage.edit({ 
+				queueMessage.edit({
 					content: `Current Page: ${currentPage + 1}/${queueEmbeds.length}`,
-					embeds: [queueEmbeds[currentPage]] 
+					embeds: [queueEmbeds[currentPage]],
 				});
 			}
-		} else {
-			if(currentPage !== 0){
-				currentPage--;
-				queueMessage.edit({ 
-					content: `Current Page: ${currentPage + 1}/${queueEmbeds.length}`,
-					embeds: [queueEmbeds[currentPage]] 
-				});
-			}
+		} else if (currentPage !== 0) {
+			currentPage--;
+			queueMessage.edit({
+				content: `Current Page: ${currentPage + 1}/${queueEmbeds.length}`,
+				embeds: [queueEmbeds[currentPage]],
+			});
 		}
 
 		try {
@@ -72,10 +75,7 @@ exports.run = async(client, message) => {
 	});
 };
 
-exports.conf = {
-	enabled: true,
-	aliases: ['queue', 'q'],
-};
+exports.conf = { enabled: true, aliases: ['queue', 'q'] };
 
 exports.help = {
 	name: 'queue',

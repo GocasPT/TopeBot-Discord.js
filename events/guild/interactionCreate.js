@@ -13,24 +13,29 @@ module.exports = async (client, interaction) => {
 		const InteractionText = `${interaction.user.tag} in ${interaction.guild.name} channel triggered an interaction in ${time}.\n`;
 
 		console.log(InteractionText);
-	}
-	catch (e) {
+	} catch (e) {
 		console.error(e);
 
 		if (interaction.replied) {
-			interaction.followUp({ content: `There was a problem with your request.\n\`\`\`${e.message}\`\`\``, ephemeral: true });
+			interaction.followUp({
+				content: `There was a problem with your request.\n\`\`\`${e.message}\`\`\``,
+				ephemeral: true,
+			});
 			console.error('An error occurred following up on an error', e);
 		}
 
 		if (interaction.deferred) {
-			interaction.editReply({ content: `There was a problem with your request.\n\`\`\`${e.message}\`\`\``, ephemeral: true });
+			interaction.editReply({
+				content: `There was a problem with your request.\n\`\`\`${e.message}\`\`\``,
+				ephemeral: true,
+			});
 			console.error('An error occurred following up on an error', e);
-		}
-
-		else {
-			interaction.reply({ content: `There was a problem with your request.\n\`\`\`${e.message}\`\`\``, ephemeral: true });
+		} else {
+			interaction.reply({
+				content: `There was a problem with your request.\n\`\`\`${e.message}\`\`\``,
+				ephemeral: true,
+			});
 			console.error('An error occurred replying on an error', e);
 		}
-
 	}
 };

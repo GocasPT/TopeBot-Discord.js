@@ -37,10 +37,11 @@ module.exports = async (client, message) => {
 		const CommandText = `${message.author.tag} in ${message.guild.name} channel triggered an interaction in ${time}.\n `;
 
 		console.log(CommandText);
-	}
-	catch (e) {
+	} catch (e) {
 		console.error(e);
-		message.channel.send({ content: `There was a problem with your request.\n\`\`\`${e.message}\`\`\`` });
+		message.channel.send({
+			content: `There was a problem with your request.\n\`\`\`${e.message}\`\`\``,
+		});
 		console.error('An error occurred replying on an error', e);
 	}
 };
