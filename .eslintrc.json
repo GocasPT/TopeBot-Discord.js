@@ -11,19 +11,31 @@
     "ecmaVersion": "latest"
   },
   "rules": {
-    "linebreak-style": ["error", "unix"],
-    "semi": ["error", "always"],
+    "prettier/prettier": [ 
+      "error", {
+        "useTabs": true,
+        "singleQuote": true,
+        "printWidth": 100,
+        "proseWrap": "never",
+        "resolveGlobalModules": true,
+        "requireConfig": true
+      }
+  ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
     "import/prefer-default-export": "off",
-    "jsx-quotes": ["error", "prefer-single"],
+    "jsx-quotes": [
+      "error",
+      "prefer-single"
+    ],
     "no-empty": "error",
     "no-irregular-whitespace": "error",
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": true,
-        "useTabs": true
-      }
-    ],
     "no-multiple-empty-lines": [
       "error",
       {

@@ -79,7 +79,10 @@ function subtractTimeString(strSmall, strBig) {
 
 // Mary had a little lamb → Mary Had A Little Lamb
 function toProperCase(string) {
-	return string.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+	return string.replace(
+		/([^\W_]+[^\s-]*) */g,
+		(txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+	);
 }
 
 // Gerador de números entre dois valores (ambos incluidos)

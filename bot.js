@@ -39,11 +39,17 @@ client.distube = new DisTube(client, {
 	emitNewSongOnly: true,
 	emitAddSongWhenCreatingQueue: true,
 	emitAddListWhenCreatingQueue: true,
-	plugins: [new SpotifyPlugin({ emitEventsAfterFetching: true }), new SoundCloudPlugin(), new YtDlpPlugin()],
+	plugins: [
+		new SpotifyPlugin({ emitEventsAfterFetching: true }),
+		new SoundCloudPlugin(),
+		new YtDlpPlugin(),
+	],
 });
 
 const status = (queue) =>
-	`Volume: \`${(queue.volume = 100)}%\` | Filter: \`${queue.filters.names.join(', ') || 'Off'}\` | Loop: \`${
+	`Volume: \`${(queue.volume = 100)}%\` | Filter: \`${
+		queue.filters.names.join(', ') || 'Off'
+	}\` | Loop: \`${
 		queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'
 	}\` | Autoplay: \`${queue.autoplay ? 'On' : 'Off'}\``;
 
