@@ -14,7 +14,10 @@ exports.run = async (client, message) => {
 	});
 };
 
-exports.conf = { enabled: true, aliases: ['button'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['button'],
+};
 
 exports.help = {
 	name: 'button',

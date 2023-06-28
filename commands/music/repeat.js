@@ -21,7 +21,10 @@ exports.run = (client, message, args) => {
 	message.channel.send(`${client.emotes.repeat} | Set repeat mode to \`${mode}\``);
 };
 
-exports.conf = { enabled: true, aliases: ['repeat', 'loop', 'l'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['repeat', 'loop', 'l'],
+};
 
 exports.help = {
 	name: 'repeat',

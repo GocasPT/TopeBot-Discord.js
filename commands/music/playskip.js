@@ -12,7 +12,10 @@ exports.run = (client, message, args) => {
 	});
 };
 
-exports.conf = { enabled: true, aliases: ['playskip', 'ps'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['playskip', 'ps'],
+};
 
 exports.help = {
 	name: 'playskip',

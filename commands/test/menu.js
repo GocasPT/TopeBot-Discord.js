@@ -25,7 +25,10 @@ exports.run = async (client, message) => {
 	});
 };
 
-exports.conf = { enabled: true, aliases: ['menu'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['menu'],
+};
 
 exports.help = {
 	name: 'menu',

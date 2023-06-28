@@ -12,7 +12,10 @@ exports.run = (client, message) => {
 	}
 };
 
-exports.conf = { enabled: true, aliases: ['resume'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['resume'],
+};
 
 exports.help = {
 	name: 'resume',

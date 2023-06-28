@@ -20,7 +20,7 @@
         "resolveGlobalModules": true,
         "requireConfig": true
       }
-  ],
+    ],
     "linebreak-style": [
       "error",
       "unix"
@@ -36,6 +36,7 @@
     ],
     "no-empty": "error",
     "no-irregular-whitespace": "error",
+    "no-unused-vars": "off",
     "no-multiple-empty-lines": [
       "error",
       {

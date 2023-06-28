@@ -1,5 +1,5 @@
 const { version, EmbedBuilder } = require('discord.js');
-const { DurationFormatter } = require('@sapphire/time-utilities');
+const humanizeDuration = require('humanize-duration');
 const progressbar = require('string-progressbar');
 const os = require('os');
 const osu = require('node-os-utils');
@@ -7,23 +7,22 @@ const osu = require('node-os-utils');
 exports.run = async (client, message) => {
 	const msg = await message.reply('Calculating...');
 
-	const durationFormatter = new DurationFormatter();
-	const durationBot = durationFormatter.format(client.uptime);
-	const durationServer = durationFormatter.format(os.uptime());
+	//	Uptime
+	const durationBot = humanizeDuration(client.uptime, { round: true });
+	const durationServer = humanizeDuration(os.uptime() * 1000, { round: true });
 
-	const CPUServerTotal = 100;
+	//	CPU
 	let CPUServerUsage;
-
 	const p1 = osu.cpu.usage().then((cpuPercentage) => {
 		CPUServerUsage = cpuPercentage.toFixed(2);
 	});
-
 	await p1;
 
-	const CPUServerBar = `${progressbar.filledBar(CPUServerTotal, CPUServerUsage)[0]} ${
-		progressbar.filledBar(CPUServerTotal, CPUServerUsage)[1]
+	const CPUServerBar = `${progressbar.filledBar(100, CPUServerUsage)[0]} ${
+		progressbar.filledBar(100, CPUServerUsage)[1]
 	}%`;
 
+	//	RAM
 	const MemTotal = (process.memoryUsage().heapTotal / 1024 / 1024).toFixed(2);
 	const MemUsage = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2);
 	const MemBar = `${progressbar.filledBar(MemTotal, MemUsage)[0]} ${progressbar
@@ -37,7 +36,6 @@ exports.run = async (client, message) => {
 		.toFixed(0)}%`;
 
 	msg.delete();
-
 	const topeStats = new EmbedBuilder()
 		.setColor('Random')
 		.setTitle('TopeBot')
@@ -66,11 +64,13 @@ exports.run = async (client, message) => {
 			{ name: 'Mem Server:', value: `${MemServerBar} in ${MemServerTotal} GB` }
 		);
 
-	message.channel.send({ embeds: [topeStats] });
-	message.channel.send({ embeds: [serverStats] });
+	message.channel.send({ embeds: [topeStats, serverStats] });
 };
 
-exports.conf = { enabled: true, aliases: ['stats'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['stats'],
+};
 
 exports.help = {
 	name: 'stats',

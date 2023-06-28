@@ -12,7 +12,10 @@ exports.run = async (client, message) => {
 	}
 };
 
-exports.conf = { enabled: true, aliases: ['skip', 's'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['skip', 's'],
+};
 
 exports.help = {
 	name: 'skip',

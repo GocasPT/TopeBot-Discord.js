@@ -18,7 +18,10 @@ exports.run = async (client, message, args) => {
 	client.distube.voices.join(voiceChannel);
 };
 
-exports.conf = { enabled: true, aliases: ['join'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['join'],
+};
 
 exports.help = {
 	name: 'join',

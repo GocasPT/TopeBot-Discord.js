@@ -54,7 +54,10 @@ exports.run = (client, message) => {
 	message.channel.send({ embeds: [nowPlayingEmbed] });
 };
 
-exports.conf = { enabled: true, aliases: ['nowplaying', 'np'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['nowplaying', 'np'],
+};
 
 exports.help = {
 	name: 'nowplaying',

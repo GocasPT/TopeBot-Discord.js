@@ -4,7 +4,10 @@ exports.run = (client, message) => {
 	}
 };
 
-exports.conf = { enabled: true, aliases: ['spam'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['spam'],
+};
 
 exports.help = {
 	name: 'spam',

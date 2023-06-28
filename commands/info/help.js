@@ -10,6 +10,8 @@ exports.run = async (client, message, args) => {
 	let categoryFolderList = [];
 	let commandsArray = [];
 	let emoji = '';
+	let foundCategory = false;
+	let foundCommand = false;
 
 	await getDir(commandDir, foldersList);
 
@@ -23,10 +25,10 @@ exports.run = async (client, message, args) => {
 		.setThumbnail(thumbnail);
 
 	if (args.length == 1) {
-		let i;
-		for (i = 0; i < foldersList.length; i++) {
-			const folderName = path.basename(foldersList[i]);
+		for (const folder of foldersList) {
+			const folderName = path.basename(folder);
 			if (args[0] == folderName) {
+				foundCategory = true;
 				const newDir = path.join(commandDir, folderName);
 
 				await getDir(newDir, categoryFolderList);
@@ -48,9 +50,9 @@ exports.run = async (client, message, args) => {
 			}
 		}
 
-		if (i == foldersList.length) {
-			for (i = 0; i < foldersList.length; i++) {
-				const folderName = path.basename(foldersList[i]);
+		if (!foundCategory) {
+			for (const folder of foldersList) {
+				const folderName = path.basename(folder);
 
 				const newDir = path.join(commandDir, folderName);
 
@@ -65,6 +67,7 @@ exports.run = async (client, message, args) => {
 				for (const commandFile of categoryFolderList) {
 					const commandFileName = path.basename(commandFile).slice(0, -3);
 					if (args[0] == commandFileName) {
+						foundCommand = true;
 						const props = require(commandFile);
 						helpEmbed.setTitle(`Dynamic Help Menu - ${commandFileName}`);
 						helpEmbed.setDescription(
@@ -75,8 +78,8 @@ exports.run = async (client, message, args) => {
 				}
 			}
 
-			if (i == foldersList.length) {
-				return message.channel.send('Não existe essa categoria ou comando com esse nome');
+			if (!foundCommand && !foundCategory) {
+				return message.channel.reply('Não existe essa categoria ou comando com esse nome');
 			}
 		}
 	} else if (args.length >= 2) {
@@ -116,7 +119,10 @@ exports.run = async (client, message, args) => {
 	message.channel.send({ embeds: [helpEmbed] });
 };
 
-exports.conf = { enabled: true, aliases: [] };
+exports.conf = {
+	enabled: true,
+	aliases: ['h'],
+};
 
 exports.help = {
 	name: 'help',

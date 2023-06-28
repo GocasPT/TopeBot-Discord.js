@@ -3,10 +3,9 @@ const { DisTube } = require('distube');
 const { SpotifyPlugin } = require('@distube/spotify');
 const { SoundCloudPlugin } = require('@distube/soundcloud');
 const { YtDlpPlugin } = require('@distube/yt-dlp');
-const { bgBlue, bgYellow, bgGreen, bgCyan } = require('colorette');
+const { bgBlue, bgYellow, bgGreen, bgCyan, bgRed } = require('colorette');
 const { readdirSync } = require('fs');
-const { emoji } = require('./config.json');
-const { token } = require('./env.json');
+const { emoji, token } = require('./config.json');
 const logger = require('./modules/logger.js');
 
 // Cliente Discord part

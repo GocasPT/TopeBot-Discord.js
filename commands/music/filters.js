@@ -57,7 +57,10 @@ exports.run = async (client, message, args) => {
 	});
 };
 
-exports.conf = { enabled: true, aliases: ['filters', 'filter'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['filters', 'filter'],
+};
 
 exports.help = {
 	name: 'filters',

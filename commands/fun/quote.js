@@ -19,7 +19,10 @@ exports.run = async (client, message) => {
 	}, 50);
 };
 
-exports.conf = { enabled: true, aliases: ['quote', 'frase'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['quote', 'frase'],
+};
 
 exports.help = {
 	name: 'quote',

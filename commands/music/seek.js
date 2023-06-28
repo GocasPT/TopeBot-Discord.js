@@ -16,7 +16,10 @@ exports.run = (client, message, args) => {
 	message.channel.send(`Seeked to ${time}!`);
 };
 
-exports.conf = { enabled: true, aliases: ['seek'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['seek'],
+};
 
 exports.help = {
 	name: 'seek',

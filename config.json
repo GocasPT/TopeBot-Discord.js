@@ -1,12 +1,13 @@
 {
 	"clientId": "725474747059535966",
+	"token": "NzI1NDc0NzQ3MDU5NTM1OTY2.Ger6eZ.KvLIgzyJvjDXBl_2jL6-g9ZsePoPbNILj4LbWA",
 	"prefix": "_",
 	"emoji": {
 		"play": "▶️",
-    	"stop": "⏹️",
-    	"queue": "📄",
-    	"success": "☑️",
-    	"repeat": "🔁",
-    	"error": "❌"
+    		"stop": "⏹️",
+    		"queue": "📄",
+    		"success": "☑️",
+    		"repeat": "🔁",
+    		"error": "❌"
 	}
 }

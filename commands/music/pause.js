@@ -12,7 +12,10 @@ exports.run = (client, message) => {
 	message.channel.send('Paused the song for you :)');
 };
 
-exports.conf = { enabled: true, aliases: ['pause'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['pause'],
+};
 
 exports.help = {
 	name: 'pause',

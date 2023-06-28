@@ -8,7 +8,10 @@ exports.run = (client, message) => {
 	message.channel.send(`${client.emotes.success} | Now previous music...`);
 };
 
-exports.conf = { enabled: true, aliases: ['previous'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['previous'],
+};
 
 exports.help = {
 	name: 'previous',

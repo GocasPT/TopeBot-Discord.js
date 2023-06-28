@@ -12,7 +12,10 @@ exports.run = (client, message, args) => {
 	});
 };
 
-exports.conf = { enabled: true, aliases: ['playnext', 'next', 'pn'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['playnext', 'next', 'pn'],
+};
 
 exports.help = {
 	name: 'playnext',

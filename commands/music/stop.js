@@ -8,7 +8,10 @@ exports.run = (client, message) => {
 	message.channel.send(`${client.emotes.success} | Stopped!`);
 };
 
-exports.conf = { enabled: true, aliases: ['stop'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['stop'],
+};
 
 exports.help = {
 	name: 'stop',

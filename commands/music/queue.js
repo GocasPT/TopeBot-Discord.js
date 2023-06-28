@@ -83,7 +83,10 @@ exports.run = async (client, message) => {
 	});
 };
 
-exports.conf = { enabled: true, aliases: ['queue', 'q'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['queue', 'q'],
+};
 
 exports.help = {
 	name: 'queue',

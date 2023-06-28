@@ -7,19 +7,20 @@ exports.run = async (client, message) => {
 	const topeDir = '/ImageLibary/Tope';
 	const listTope = [];
 
-	getDir(topeDir, listTope);
+	await getDir(topeDir, listTope);
 
-	setTimeout(() => {
-		const i = numberGenerator(0, listTope.length - 1);
-		const attachment = new AttachmentBuilder(`${listTope[i]}`);
+	const i = numberGenerator(0, listTope.length - 1);
+	const attachment = new AttachmentBuilder(`${listTope[i]}`);
 
-		msg.delete();
+	msg.delete();
 
-		message.channel.send({ files: [attachment] });
-	}, 50);
+	message.channel.send({ files: [attachment] });
 };
 
-exports.conf = { enabled: true, aliases: ['imagem'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['imagem'],
+};
 
 exports.help = {
 	name: 'image',

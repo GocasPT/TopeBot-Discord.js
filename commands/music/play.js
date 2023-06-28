@@ -11,7 +11,10 @@ exports.run = (client, message, args) => {
 	});
 };
 
-exports.conf = { enabled: true, aliases: ['play', 'p'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['play', 'p'],
+};
 
 exports.help = {
 	name: 'play',

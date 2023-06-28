@@ -8,7 +8,10 @@ exports.run = async (client, message) => {
 	message.channel.send('Shuffled songs in the queue');
 };
 
-exports.conf = { enabled: true, aliases: ['shuffle'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['shuffle'],
+};
 
 exports.help = {
 	name: 'shuffle',

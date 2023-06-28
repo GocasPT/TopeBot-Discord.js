@@ -8,7 +8,10 @@ exports.run = (client, message) => {
 	message.channel.send(`${client.emotes.success} | AutoPlay: \`${autoplay ? 'On' : 'Off'}\``);
 };
 
-exports.conf = { enabled: true, aliases: ['autuplay', 'auto'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['autuplay', 'auto'],
+};
 
 exports.help = {
 	name: 'autoplay',

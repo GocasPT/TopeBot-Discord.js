@@ -12,7 +12,10 @@ exports.run = (client, message, args) => {
 	}
 };
 
-exports.conf = { enabled: true, aliases: ['chamar'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['chamar'],
+};
 
 exports.help = {
 	name: 'chamar',

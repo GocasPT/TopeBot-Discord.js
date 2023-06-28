@@ -2,7 +2,10 @@ exports.run = (client, message) => {
 	client.distube.voices.leave(message);
 };
 
-exports.conf = { enabled: true, aliases: ['leave'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['leave'],
+};
 
 exports.help = {
 	name: 'leave',

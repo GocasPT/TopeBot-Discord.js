@@ -11,7 +11,10 @@ exports.run = (client, message, args) => {
 	message.channel.send(`${client.emotes.success} | Volume set to \`${volume}\``);
 };
 
-exports.conf = { enabled: true, aliases: ['volume', 'v'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['volume', 'v'],
+};
 
 exports.help = {
 	name: 'volume',

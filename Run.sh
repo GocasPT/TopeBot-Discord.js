@@ -1,5 +1,7 @@
 #!/bin/sh
 cd /home/pi/TopeBot-Discord.js
+
 npm run upload
-screen -dmS TopeBot npm run dev
-#npm run dev
+
+screen -S TopeBot npm run start
+#pm2 start bot.js --name TopeBot

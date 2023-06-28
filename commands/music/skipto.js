@@ -17,7 +17,10 @@ exports.run = async (client, message, args) => {
 	});
 };
 
-exports.conf = { enabled: true, aliases: ['skipto'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['skipto'],
+};
 
 exports.help = {
 	name: 'skipto',

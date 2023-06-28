@@ -16,7 +16,10 @@ exports.run = (client, message, args) => {
 	message.channel.send(`Rewinded the song for ${time}!`);
 };
 
-exports.conf = { enabled: true, aliases: ['rewind'] };
+exports.conf = {
+	enabled: true,
+	aliases: ['rewind'],
+};
 
 exports.help = {
 	name: 'rewind',
